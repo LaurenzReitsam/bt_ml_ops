@@ -1,0 +1,34 @@
+name: Check File on Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'app/files/**'
+
+jobs:
+  check-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if file exists
+        working-directory: app/files
+        run: |
+          ls
+          # Get the branch name from the pull request
+          BRANCH_NAME=$(echo "${{ github.head_ref }}" | tr '/' '-')
+          FILE_PATH="${BRANCH_NAME}.txt"
+
+          echo "'${FILE_PATH}'"
+
+          # Check if the file exists
+          if [ -f "$FILE_PATH" ]; then
+            echo "File $FILE_PATH exists."
+          else
+            echo "File $FILE_PATH does not exist."
+            exit 1
+          fi
