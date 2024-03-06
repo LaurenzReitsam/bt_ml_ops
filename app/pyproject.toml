@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "demo-service"
+version = "0.1.0"
+description = "Service for CICD demonstration"
+authors = ["LaurenzReitsam <laurenz.reitsam@btelligent.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.110.0"
+uvicorn = "^0.27.1"
+pydantic = "^2.6.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
