@@ -47,4 +47,4 @@ jobs:
           IMAGE=${{ steps.image.outputs.IMAGE }}
           gcloud run deploy demo-app \
             --image $IMAGE \
-            --region europe-west1
+            --region europe-west3
