@@ -26,8 +26,8 @@ if __name__ == "__main__":
             file = Path("./files").resolve() / request.filename
             return Response(content=file.read_text())
         except FileNotFoundError:
-            raise HTTPException(
-                404, f"{file=} not found. Possible options are:\n{', '.join(x.name for x in file.parent.iterdir())}"
-            )
+            files = [x.name for x in file.parent.iterdir()]
+            msg = f"{file=} not found. Possible options are:\n{', '.join(files)}"
+            raise HTTPException(404, msg)
 
     uvicorn.run(app, host="0.0.0.0", port=8080)
